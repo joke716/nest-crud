@@ -3,4 +3,3 @@ export class CreatePostDto {
   title: string;
 }
 
-export default CreatePostDto;

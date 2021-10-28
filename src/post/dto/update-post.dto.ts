@@ -4,4 +4,3 @@ export class UpdatePostDto {
   title: string;
 }
 
-export default UpdatePostDto;
