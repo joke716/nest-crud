@@ -1,6 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Req, Res, HttpCode } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
+import RequestWithUser from './requestWithUser.interface';
 import { RegisterDto } from './dto/Register.dto';
+import { LocalAuthenticationGuard } from "./localAuthentication.guard";
 
 @Controller('authentication')
 export class AuthenticationController {
@@ -13,8 +15,14 @@ export class AuthenticationController {
     return this.authenticationService.register(registrationData);
   }
 
+  @HttpCode(200)
+  @UseGuards(LocalAuthenticationGuard)
   @Post('login')
-  async logIn() {}
+  async logIn(@Req() request: RequestWithUser) {
+    const user = request.user;
+    user.password = undefined;
+    return user;
+  }
 
 
 }
