@@ -16,7 +16,9 @@ import { AuthenticationModule } from './authentication/authentication.module';
         MYSQL_PASSWORD: Joi.string().required(),
         MYSQL_DB: Joi.string().required(),
         PORT: Joi.number(),
-      })
+        JWT_SECRET: Joi.string().required(),
+        JWT_EXPIRATION_TIME: Joi.string().required(),
+      }),
     }),
     DatabaseModule,
     PostModule,
